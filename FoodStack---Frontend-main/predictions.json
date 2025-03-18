@@ -1,0 +1,38 @@
+{
+    "Pizza": [
+      {"breakfast": 45, "lunch": 120, "dinner": 85, "total": 250},
+      {"breakfast": 50, "lunch": 130, "dinner": 90, "total": 270},
+      {"breakfast": 40, "lunch": 125, "dinner": 95, "total": 260},
+      {"breakfast": 55, "lunch": 135, "dinner": 85, "total": 275},
+      {"breakfast": 45, "lunch": 140, "dinner": 90, "total": 275},
+      {"breakfast": 60, "lunch": 130, "dinner": 95, "total": 285},
+      {"breakfast": 50, "lunch": 145, "dinner": 100, "total": 295}
+    ],
+    "Burger": [
+      {"breakfast": 35, "lunch": 150, "dinner": 95, "total": 280},
+      {"breakfast": 40, "lunch": 160, "dinner": 90, "total": 290},
+      {"breakfast": 45, "lunch": 155, "dinner": 100, "total": 300},
+      {"breakfast": 35, "lunch": 165, "dinner": 95, "total": 295},
+      {"breakfast": 50, "lunch": 160, "dinner": 90, "total": 300},
+      {"breakfast": 45, "lunch": 170, "dinner": 95, "total": 310},
+      {"breakfast": 40, "lunch": 165, "dinner": 105, "total": 310}
+    ],
+    "Pasta": [
+      {"breakfast": 25, "lunch": 110, "dinner": 75, "total": 210},
+      {"breakfast": 30, "lunch": 115, "dinner": 80, "total": 225},
+      {"breakfast": 35, "lunch": 120, "dinner": 75, "total": 230},
+      {"breakfast": 30, "lunch": 125, "dinner": 85, "total": 240},
+      {"breakfast": 35, "lunch": 120, "dinner": 80, "total": 235},
+      {"breakfast": 40, "lunch": 130, "dinner": 85, "total": 255},
+      {"breakfast": 35, "lunch": 125, "dinner": 90, "total": 250}
+    ],
+    "Coffee": [
+      {"breakfast": 150, "lunch": 100, "dinner": 50, "total": 300},
+      {"breakfast": 160, "lunch": 110, "dinner": 55, "total": 325},
+      {"breakfast": 155, "lunch": 105, "dinner": 60, "total": 320},
+      {"breakfast": 165, "lunch": 115, "dinner": 50, "total": 330},
+      {"breakfast": 170, "lunch": 110, "dinner": 55, "total": 335},
+      {"breakfast": 175, "lunch": 120, "dinner": 60, "total": 355},
+      {"breakfast": 180, "lunch": 115, "dinner": 65, "total": 360}
+    ]
+  }
