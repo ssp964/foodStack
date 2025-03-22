@@ -76,3 +76,7 @@ To deploy this project run
   pip install -r requirements.txt
 ```
 
+To run a specific processing file use
+
+python -m package.module
+

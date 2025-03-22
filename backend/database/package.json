@@ -1,0 +1,12 @@
+{
+    "name": "graphql-backend",
+    "version": "1.0.0",
+    "main": "index.js",
+    "dependencies": {
+      "apollo-server": "^3.11.1",
+      "pg": "^8.10.0",
+      "graphql": "^16.6.0",
+      "dotenv": "^16.0.3"
+    }
+  }
+  
