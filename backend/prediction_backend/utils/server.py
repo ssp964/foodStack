@@ -10,6 +10,8 @@ class PostgresConnector:
         self.connection_pool = psycopg2.pool.SimpleConnectionPool(
             minconn=1,
             maxconn=10,
+            # host=os.getenv("DB_HOST", "postgres"),
+            # use when you want to run main.py locally
             host=os.getenv("DB_HOST", "localhost"),
             database=os.getenv("POSTGRES_DB", "foodstack_db"),
             user=os.getenv("POSTGRES_USER", "postgres"),

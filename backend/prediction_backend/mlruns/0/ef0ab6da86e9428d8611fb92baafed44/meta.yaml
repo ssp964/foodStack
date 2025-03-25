@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/ssp/Downloads/foodstack/backend/prediction_backend/mlruns/0/ef0ab6da86e9428d8611fb92baafed44/artifacts
+end_time: 1742692862474
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: ef0ab6da86e9428d8611fb92baafed44
+run_name: model_update_20250322_212100
+run_uuid: ef0ab6da86e9428d8611fb92baafed44
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1742692860440
+status: 3
+tags: []
+user_id: ssp

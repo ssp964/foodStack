@@ -1,56 +1,37 @@
-from datetime import datetime
 import pandas as pd
-import pytz
+from datetime import datetime
+from utils.server import PostgresConnector
+
+db = PostgresConnector()
 
 
-# Fetch all data from MongoDB
-def fetch_all_data_from_mongo(collection):
+def fetch_all_data():
     """
-    Fetch all historical data up to the current date.
+    Fetch all historical data up to the current date from PostgreSQL.
+    Filters out future records based on the 'date' column.
     """
 
-    # Query all documents
-    cursor = collection.find()
-    data = pd.DataFrame(list(cursor))
-
-    # Convert the 'Date' field from string to datetime
-    data["Date"] = pd.to_datetime(data["Date"])
-
-    # Filter rows where the 'Date' is before the current date
-    filtered_data = data[data["Date"] < datetime.now()]
-    return filtered_data
-
-
-def fetch_current_date_data(collection):
+    query = """
+        SELECT * 
+        FROM actual_data
     """
-    Fetch only the data for the current date
 
-    Parameters:
-    - collection: MongoDB collection object
+    now = datetime.now()
+    data = db.query_to_dataframe(query)
+    return data
+
+
+def fetch_current_data():
+    """
+    Fetch only the rows from PostgreSQL that match today's date (ignores time).
 
     Returns:
-    - current_date_data: Pandas DataFrame containing data for the current date
+    - current_date_data: Pandas DataFrame with today's records
     """
-    # Query all documents
-    cursor = collection.find()
-    data = pd.DataFrame(list(cursor))
-
-    # Safeguard: Check if the 'Date' column exists
-    if "Date" in data.columns:
-        # Convert the 'Date' field from string to datetime
-        data["Date"] = pd.to_datetime(
-            data["Date"], errors="coerce"
-        )  # Handle invalid dates gracefully
-
-        # Get today's date in YYYY-MM-DD format
-        today = datetime.now().date()
-
-        # Filter rows where the 'Date' matches today's date
-        current_date_data = data[data["Date"].dt.date == today]
-    else:
-        print("Warning: 'Date' column not found in the fetched data.")
-        current_date_data = (
-            pd.DataFrame()
-        )  # Return an empty DataFrame if 'Date' column is missing
-
-    return current_date_data
+    query = """
+        SELECT * FROM actual_data
+        WHERE DATE(date) = %s
+    """
+    today = datetime.now().date()
+    data = db.query_to_dataframe(query, params=(today,))
+    return data

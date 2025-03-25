@@ -37,5 +37,20 @@ services:
       - ./backend/database:/app
       - /app/node_modules
 
+  ml_pipeline:
+    build:
+      context: ./backend/prediction_backend
+      dockerfile: Dockerfile
+    container_name: ml_pipeline
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: python prediction_backend/main.py
+    volumes:
+      - ./backend:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/foodstack_db
+
 volumes:
   postgres_data:

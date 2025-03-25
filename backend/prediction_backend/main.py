@@ -1,33 +1,19 @@
-from train import train_model
-from predict import update_model
-from data_ingestion_fn import connect_to_mongo, fetch_current_date_data
-from datetime import datetime
-import time
-
-mongo_uri = "..."  # put your env/config here
-database_name = "..."
-collection_name = "..."
-collection_name_send = "..."
+from pipeline.intitalTrain_pipeline import run_initial_training_pipeline
+from pipeline.dailyUpdate_pipeline import daily_update_job
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 
-def continuous_training_pipeline():
-    model, preprocessor = train_model()
+def start_pipeline():
+    # print("Starting initial training pipeline...")
+    # run_initial_training_pipeline()
 
-    while True:
-        now = datetime.now()
-        if now.hour == 23 and now.minute == 55:
-            collection = connect_to_mongo(mongo_uri, database_name, collection_name)
-            today_data = fetch_current_date_data(collection)
+    print("Scheduling daily update job...")
+    scheduler = BlockingScheduler()
+    scheduler.add_job(daily_update_job, "cron", hour=12, minute=12)
+    print("Scheduler started. Waiting for next run...")
 
-            if not today_data.empty:
-                model = update_model(model, today_data)
-            else:
-                print("No data to update.")
-
-            time.sleep(86400)  # sleep 1 day
-        else:
-            time.sleep(60)
+    scheduler.start()
 
 
 if __name__ == "__main__":
-    continuous_training_pipeline()
+    start_pipeline()

@@ -4,9 +4,9 @@ from sklearn.compose import ColumnTransformer
 
 
 # Function to divide data into features (X) and target (y)
-def divide_data(data: pd.DataFrame, target_column: str = "Amount"):
+def divide_data(data: pd.DataFrame, target_column: str = "quantity"):
     """
-    Divides the data into features (X) and target (y).
+    Divides the data into features (X) and target (y), removing unwanted columns.
 
     Parameters:
     - data: input DataFrame to divide
@@ -16,10 +16,13 @@ def divide_data(data: pd.DataFrame, target_column: str = "Amount"):
     - X: Features DataFrame
     - y: Target Series
     """
+    # Columns to drop
+    drop_columns = ["id", "date", target_column]
 
-    feature_columns = [col for col in data.columns if col != target_column]
-    X = data[feature_columns]
+    # Keep only relevant feature columns
+    X = data.drop(columns=drop_columns, errors="ignore")
     y = data[target_column]
+
     return X, y
 
 
@@ -47,15 +50,15 @@ def preprocess_data(data: pd.DataFrame):
         "Sunday": 6,
     }
     data = data.copy()
-    data["Day"] = data["Day"].map(day_mapping)
+    data["day_of_week"] = data["day_of_week"].map(day_mapping)
 
     # preprocessing pipeline
     preprocessor = ColumnTransformer(
         transformers=[
             # Scale 'Day' and 'Hour'
-            ("scale", StandardScaler(), ["Day", "Hour"]),
+            ("scale", StandardScaler(), ["day_of_week", "hour"]),
             # One-hot encode 'Dish'
-            ("onehot", OneHotEncoder(), ["Dish"]),
+            ("onehot", OneHotEncoder(), ["dish"]),
         ]
     )
 

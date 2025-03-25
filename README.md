@@ -80,3 +80,12 @@ To run a specific processing file use
 
 python -m package.module
 
+## Test
+
+To test the database connections run the following:
+
+```bash
+python -m test.test
+```
+
+Uncomment the function calls to run a specific test.
